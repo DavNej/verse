@@ -1,0 +1,47 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.13/schema.json",
+  "files": {
+    "includes": ["**", "!.wxt", "!.output", "!test/fixtures"]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended"
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["src/core/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "error"
+          },
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "paths": {
+                  "wxt/browser": "src/core/ must stay environment-agnostic.",
+                  "wxt/utils/storage": "src/core/ must stay environment-agnostic.",
+                  "react": "src/core/ must stay framework-agnostic.",
+                  "react-dom": "src/core/ must stay framework-agnostic."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

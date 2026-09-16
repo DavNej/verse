@@ -1,0 +1,18 @@
+{
+  // src/core/ must be environment-agnostic so it can be lifted into an Obsidian
+  // plugin later. No DOM lib, no ambient types: reaching for a browser global is
+  // a type error, not a convention.
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022"],
+    "types": [],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true
+  },
+  "include": ["src/core/**/*"]
+}
