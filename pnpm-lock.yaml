@@ -23,7 +23,10 @@ importers:
         version: 2.5.13
       '@tailwindcss/vite':
         specifier: ^4.1.18
-        version: 4.3.3(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))
+        version: 4.3.3(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))
+      '@types/node':
+        specifier: ^22.20.2
+        version: 22.20.2
       '@types/react':
         specifier: ^19.2.14
         version: 19.3.0
@@ -32,7 +35,7 @@ importers:
         version: 19.3.0(@types/react@19.3.0)
       '@wxt-dev/module-react':
         specifier: ^1.1.5
-        version: 1.2.2(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))(wxt@0.21.4(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(typescript@5.9.3)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)))
+        version: 1.2.2(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))(wxt@0.21.4(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(typescript@5.9.3)(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)))
       tailwindcss:
         specifier: ^4.1.18
         version: 4.3.3
@@ -41,10 +44,10 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.11
-        version: 4.1.11(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))
+        version: 4.1.11(@types/node@22.20.2)(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))
       wxt:
         specifier: ^0.21.4
-        version: 0.21.4(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(typescript@5.9.3)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))
+        version: 0.21.4(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(typescript@5.9.3)(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))
 
 packages:
 
@@ -675,6 +678,9 @@ packages:
 
   '@types/har-format@1.2.16':
     resolution: {integrity: sha512-fluxdy7ryD3MV6h8pTfTYpy/xQzCFC7m89nOH9y94cNqJ1mDIDPut7MnRHI3F6qRmh/cT2fUjG1MLdCNb4hE9A==}
+
+  '@types/node@22.20.2':
+    resolution: {integrity: sha512-xlvWf4Vs9n1PEVYwP1n4vvG07M6y8WgvJ2t0vbrWTmijsIHp1cS+uJ2kMIRdY3nHZK0nCYKrPeD171+SzF4/zw==}
 
   '@types/react-dom@19.3.0':
     resolution: {integrity: sha512-ZI7bU42mZXXKHn/qNLEw2IrbiINU7X5+vfgdixBHkCNpYWXjKgfQ/P+uyGb5CjOLB9UcnTeg3rylQtV2hym44Q==}
@@ -1344,6 +1350,9 @@ packages:
   uhyphen@0.2.0:
     resolution: {integrity: sha512-qz3o9CHXmJJPGBdqzab7qAYuW8kQGKNEuoHFYrBwV6hWIMcpAmxDLXojcHfFr9US1Pe6zUswEIJIbLI610fuqA==}
 
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
   unimport@6.5.0:
     resolution: {integrity: sha512-t0KLJLRbebz3f7NrQe+vy2ObeugVeM1XqI2oeYnauddmHSglYj3U6bxOJ65IbXmOFkcAGFJK2OyGH7aqHPM6Ug==}
     engines: {node: '>=18.12.0'}
@@ -1874,12 +1883,12 @@ snapshots:
       '@tailwindcss/oxide-win32-arm64-msvc': 4.3.3
       '@tailwindcss/oxide-win32-x64-msvc': 4.3.3
 
-  '@tailwindcss/vite@4.3.3(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))':
+  '@tailwindcss/vite@4.3.3(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))':
     dependencies:
       '@tailwindcss/node': 4.3.3
       '@tailwindcss/oxide': 4.3.3
       tailwindcss: 4.3.3
-      vite: 8.3.0(esbuild@0.28.2)(jiti@2.7.0)
+      vite: 8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)
 
   '@topcli/prompts@4.0.0': {}
 
@@ -1900,6 +1909,10 @@ snapshots:
 
   '@types/har-format@1.2.16': {}
 
+  '@types/node@22.20.2':
+    dependencies:
+      undici-types: 6.21.0
+
   '@types/react-dom@19.3.0(@types/react@19.3.0)':
     dependencies:
       '@types/react': 19.3.0
@@ -1908,10 +1921,10 @@ snapshots:
     dependencies:
       csstype: 3.2.3
 
-  '@vitejs/plugin-react@6.1.1(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))':
+  '@vitejs/plugin-react@6.1.1(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.3.0(esbuild@0.28.2)(jiti@2.7.0)
+      vite: 8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)
 
   '@vitest/expect@4.1.11':
     dependencies:
@@ -1922,13 +1935,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.1
 
-  '@vitest/mocker@4.1.11(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))':
+  '@vitest/mocker@4.1.11(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))':
     dependencies:
       '@vitest/spy': 4.1.11
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.3.0(esbuild@0.28.2)(jiti@2.7.0)
+      vite: 8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)
 
   '@vitest/pretty-format@4.1.11':
     dependencies:
@@ -1970,11 +1983,11 @@ snapshots:
       '@types/filesystem': 0.0.36
       '@types/har-format': 1.2.16
 
-  '@wxt-dev/module-react@1.2.2(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))(wxt@0.21.4(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(typescript@5.9.3)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)))':
+  '@wxt-dev/module-react@1.2.2(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))(wxt@0.21.4(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(typescript@5.9.3)(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)))':
     dependencies:
-      '@vitejs/plugin-react': 6.1.1(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))
-      vite: 8.3.0(esbuild@0.28.2)(jiti@2.7.0)
-      wxt: 0.21.4(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(typescript@5.9.3)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))
+      '@vitejs/plugin-react': 6.1.1(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))
+      vite: 8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)
+      wxt: 0.21.4(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(typescript@5.9.3)(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))
     transitivePeerDependencies:
       - '@rolldown/plugin-babel'
       - babel-plugin-react-compiler
@@ -2529,7 +2542,9 @@ snapshots:
 
   uhyphen@0.2.0: {}
 
-  unimport@6.5.0(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)):
+  undici-types@6.21.0: {}
+
+  unimport@6.5.0(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)):
     dependencies:
       acorn: 8.18.0
       escape-string-regexp: 5.0.0
@@ -2543,7 +2558,7 @@ snapshots:
       scule: 1.3.0
       strip-literal: 4.0.0
       tinyglobby: 0.2.17
-      unplugin: 3.3.0(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))
+      unplugin: 3.3.0(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))
       unplugin-utils: 0.3.2
     optionalDependencies:
       rolldown: 1.2.8
@@ -2562,7 +2577,7 @@ snapshots:
       pathe: 2.0.3
       picomatch: 4.0.7
 
-  unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)):
+  unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)):
     dependencies:
       '@jridgewell/remapping': 2.3.5
       picomatch: 4.0.7
@@ -2571,9 +2586,9 @@ snapshots:
       esbuild: 0.28.2
       rolldown: 1.2.8
       rollup: 4.63.3
-      vite: 8.3.0(esbuild@0.28.2)(jiti@2.7.0)
+      vite: 8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)
 
-  vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0):
+  vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -2581,14 +2596,15 @@ snapshots:
       rolldown: 1.2.8
       tinyglobby: 0.2.17
     optionalDependencies:
+      '@types/node': 22.20.2
       esbuild: 0.28.2
       fsevents: 2.3.3
       jiti: 2.7.0
 
-  vitest@4.1.11(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)):
+  vitest@4.1.11(@types/node@22.20.2)(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)):
     dependencies:
       '@vitest/expect': 4.1.11
-      '@vitest/mocker': 4.1.11(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))
+      '@vitest/mocker': 4.1.11(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))
       '@vitest/pretty-format': 4.1.11
       '@vitest/runner': 4.1.11
       '@vitest/snapshot': 4.1.11
@@ -2605,8 +2621,10 @@ snapshots:
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.1
-      vite: 8.3.0(esbuild@0.28.2)(jiti@2.7.0)
+      vite: 8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)
       why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@types/node': 22.20.2
     transitivePeerDependencies:
       - msw
 
@@ -2623,7 +2641,7 @@ snapshots:
       string-width: 4.2.3
       strip-ansi: 6.0.1
 
-  wxt@0.21.4(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(typescript@5.9.3)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)):
+  wxt@0.21.4(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(typescript@5.9.3)(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)):
     dependencies:
       '@1natsu/wait-element': 4.2.0
       '@aklinker1/rollup-plugin-visualizer': 5.12.0(rollup@4.63.3)
@@ -2653,8 +2671,8 @@ snapshots:
       tiny-open: 1.3.0
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
-      unimport: 6.5.0(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0))
-      vite: 8.3.0(esbuild@0.28.2)(jiti@2.7.0)
+      unimport: 6.5.0(esbuild@0.28.2)(rolldown@1.2.8)(rollup@4.63.3)(vite@8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0))
+      vite: 8.3.0(@types/node@22.20.2)(esbuild@0.28.2)(jiti@2.7.0)
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
