@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+/* The popup is our own document, so a dark surface is set once here and the
+   components stay theme-free. */
+html,
+body {
+  margin: 0;
+  background-color: var(--color-neutral-900);
+  color-scheme: dark;
+}

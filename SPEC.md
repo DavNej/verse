@@ -69,11 +69,12 @@ verse/
 ├── SPEC.md                          ← this document
 ├── entrypoints/
 │   ├── content/
-│   │   ├── index.tsx                ← M1 — content script, mounts the Shadow DOM UI
-│   │   └── style.css                ← M1 — Tailwind entry for the shadow root
-│   ├── popup/                       ← M2
+│   │   └── index.ts                 ← M1 — headless content script, message handler only
+│   ├── popup/                       ← M1 — the whole M1 UI (see 1.7)
 │   │   ├── index.html
-│   │   └── main.tsx
+│   │   ├── main.tsx
+│   │   ├── App.tsx
+│   │   └── style.css
 │   └── options/                     ← M2
 │       ├── index.html
 │       └── main.tsx
@@ -148,7 +149,7 @@ These apply to every milestone and are non-negotiable.
 
 **Deliverable:** On a `/watch` page, a button appears below the player. Clicking it copies a clean timestamped Markdown transcript in the video's original language to the clipboard, and shows a toast.
 
-**Explicitly not in M1:** no popup, no options page, no chapters, no track selector, no plain-text or SRT output, no file download, no Obsidian integration, no settings persistence. Create the folders, leave those files empty.
+**Explicitly not in M1:** no options page, no chapters, no track selector, no plain-text or SRT output, no file download, no Obsidian integration, no settings persistence. Create the folders, leave those files empty.
 
 ## 1.1 Pipeline
 
@@ -232,15 +233,24 @@ Header block: video title, channel, URL, duration, detected language, an explici
 
 Then the transcript blocks, each prefixed with `[MM:SS]` rendered as a clickable link to `URL&t=NNNs`.
 
-Copy to clipboard. Toast confirms success, stating the language selected and the number of blocks produced.
+Copy to clipboard from the popup. The popup's status line confirms success, stating the language selected and the number of blocks produced.
 
-## 1.7 Injected UI
+## 1.7 UI — toolbar popup
 
-Use WXT's Shadow DOM content-script UI helper (`createShadowRootUi`) with `cssInjectionMode: 'ui'`, mounting a React root.
+**Decided during M1, replacing an earlier plan for an injected in-page button.** Verse injects nothing into YouTube's UI. Clicking the extension icon opens the popup, and that popup is the entire M1 interface.
 
-`VerseButton` sits in the action bar below the player, visually consistent with YouTube's UI, **working in both dark and light themes**. `Toast` reports success or the mapped error message.
+This removes three of the pitfalls listed in 0.8 outright: there is no YouTube DOM anchor to lose, no Tailwind-in-Shadow-DOM problem and no preflight leakage, and no theme to match.
 
-YouTube's DOM changes often and builds asynchronously. Use a `MutationObserver` with several fallback selectors. If no anchor is found, log and do nothing — do not throw.
+The popup is React and Tailwind in its own document. On open it reads the active tab, and on a `/watch` page it immediately asks the content script to extract:
+
+- Detected language, with auto-generated vs manual indicated.
+- One primary button, **Copy Markdown**, writing to the clipboard with `navigator.clipboard` — the popup is a focused document, so no content-script clipboard workaround is needed.
+- A status line (`Toast`) reporting the language and block count on success, or a message mapped from `ExtractionErrorKind` by an exhaustive `switch` on failure.
+- Off a `/watch` page: an explanation, and no message sent.
+
+Everything else the popup gains at M2 — track selector, output format, block duration, download, preview — stays at M2.
+
+A content script is still required, because reading the page and fetching captions must happen on youtube.com's own origin. It is **headless**: no UI, no Shadow DOM, just a typed `runtime.onMessage` handler with a per-video result cache. Rendering nothing is what guarantees it cannot break the host page.
 
 ## 1.8 M1 acceptance criteria
 
@@ -250,9 +260,10 @@ YouTube's DOM changes often and builds asynchronously. Use a `MutationObserver` 
 - [ ] A French video with ASR-only captions produces French output with no sliding-window repetition.
 - [ ] A dubbed video produces the **original** language, not the dubbed one.
 - [ ] A video with no captions shows the correct message and does not throw.
-- [ ] Clicking through three videos in a row via suggestions extracts the correct transcript each time (SPA check).
+- [ ] Clicking through three videos in a row via suggestions extracts the correct transcript each time, checked by opening the popup on each (SPA check).
 - [ ] No occurrence of `tlang` anywhere in the codebase.
-- [ ] Button renders correctly in both YouTube dark and light themes; Tailwind preflight is not leaking into the host page.
+- [ ] The popup renders correctly and nothing at all is injected into YouTube's page.
+- [ ] Opening the popup on a non-`/watch` tab explains itself and sends no message.
 - [ ] Block timestamps, when clicked, seek to the correct point in the video.
 - [ ] Verse is used for real over several days before M2 begins.
 
