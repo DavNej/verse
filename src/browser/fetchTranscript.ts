@@ -4,6 +4,7 @@
  * json3 is requested explicitly: it avoids XML parsing and HTML entity unescaping.
  */
 
+import { type PoToken, withPoToken } from '../core/poToken';
 import { safeParseTimedText } from '../core/schemas/timedText';
 import {
   type CaptionTrack,
@@ -24,13 +25,22 @@ function json3Url(baseUrl: string): string {
   return baseUrl.includes('?') ? `${baseUrl}&fmt=json3` : `${baseUrl}?fmt=json3`;
 }
 
-/** Downloads and validates one caption track. */
+/**
+ * Downloads and validates one caption track.
+ *
+ * Without a proof-of-origin token YouTube answers with an empty body, so the
+ * request is still made — it costs nothing if YouTube stops asking — but an empty
+ * answer is then reported as the missing token rather than as an empty track.
+ */
 export async function fetchTranscript(
   track: CaptionTrack,
+  token: PoToken | null,
 ): Promise<Result<TranscriptSegment[], ExtractionError>> {
+  const url = json3Url(token ? withPoToken(track.baseUrl, token) : track.baseUrl);
+
   let response: Response;
   try {
-    response = await fetch(json3Url(track.baseUrl), { credentials: 'include' });
+    response = await fetch(url, { credentials: 'include' });
   } catch (cause) {
     return err(extractionError('network', { detail: String(cause) }));
   }
@@ -41,7 +51,7 @@ export async function fetchTranscript(
   }
 
   const body = (await response.text()).trim();
-  if (body.length === 0) return err(extractionError('empty-track'));
+  if (body.length === 0) return err(extractionError(token ? 'empty-track' : 'missing-po-token'));
   // An interstitial answers with a page, not with JSON.
   if (body.startsWith('<')) return err(extractionError('consent-wall'));
 

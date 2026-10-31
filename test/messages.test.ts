@@ -7,6 +7,7 @@ const ALL_KINDS: ExtractionErrorKind[] = [
   'schema-mismatch',
   'no-caption-tracks',
   'empty-track',
+  'missing-po-token',
   'consent-wall',
   'rate-limited',
   'network',

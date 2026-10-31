@@ -29,6 +29,8 @@ export function messageForError(error: ExtractionError): string {
       return 'This video has no captions, so there is nothing to extract.';
     case 'empty-track':
       return 'The caption track is listed but came back empty.';
+    case 'missing-po-token':
+      return 'YouTube withheld the captions. Turn on CC in the player once, then try again.';
     case 'consent-wall':
       return 'YouTube asked for consent instead of returning captions. Accept it on youtube.com, then retry.';
     case 'rate-limited':

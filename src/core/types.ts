@@ -25,6 +25,8 @@ export type ExtractionErrorKind =
   | 'no-caption-tracks'
   /** A track was listed, but downloading it produced no events. */
   | 'empty-track'
+  /** The track came back empty and no proof-of-origin token could be obtained for it. */
+  | 'missing-po-token'
   /** HTML came back instead of JSON — usually a consent interstitial. */
   | 'consent-wall'
   /** HTTP 429. */

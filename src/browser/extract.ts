@@ -11,6 +11,7 @@ import { selectOriginalTrack } from '../core/trackSelector';
 import { type ExtractionError, err, ok, type Result, type Transcript } from '../core/types';
 import { fetchTranscript } from './fetchTranscript';
 import { getPlayerContext } from './playerResponse';
+import { requestPoToken } from './poToken';
 
 export type ExtractionOutput = {
   markdown: string;
@@ -38,7 +39,11 @@ export async function extract(videoId: string): Promise<Result<ExtractionOutput,
     `[Verse] track: ${track.languageCode} (${isAsr ? 'auto-generated' : 'manual'}), reason: ${reason.kind}`,
   );
 
-  const segments = await fetchTranscript(track);
+  // Logged as present or absent only: the token is a credential.
+  const token = await requestPoToken(videoId);
+  console.info(`[Verse] caption token: ${token ? 'captured' : 'missing'}`);
+
+  const segments = await fetchTranscript(track, token);
   if (!segments.ok) return err(segments.error);
 
   const normalized = isAsr ? deduplicateAsr(segments.value) : cleanSegments(segments.value);
